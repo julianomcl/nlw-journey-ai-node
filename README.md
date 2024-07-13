@@ -1,4 +1,4 @@
-Algumas fontes e links úteis consultados para o conteúdo:
+Algumas fontes e links úteis consultados para o desenvolvimento:
 
 https://github.com/rocketseat-education/nlw-journey-ia
 
