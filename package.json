@@ -12,8 +12,14 @@
     "@langchain/community": "^0.2.18",
     "@langchain/core": "^0.2.15",
     "@langchain/openai": "^0.2.1",
+    "@langchain/textsplitters": "^0.0.3",
+    "@mozilla/readability": "^0.5.0",
+    "cheerio": "1.0.0-rc.12",
+    "chromadb": "^1.8.1",
     "dotenv": "^16.4.5",
     "duck-duck-scrape": "^2.2.5",
+    "html-to-text": "^9.0.5",
+    "jsdom": "^24.1.0",
     "langchain": "^0.2.9",
     "openai": "^4.52.7"
   }
