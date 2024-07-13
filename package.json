@@ -1,0 +1,20 @@
+{
+  "name": "nlw-journey-ai-node",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "chat-comp": "node chatComp.js",
+    "travel-agent": "node travelAgent.js"
+  },
+  "description": "Aplicação do NLW Journey da RockerSeat seguindo a trilha de AI, mas desenvolvendo com Node.js",
+  "dependencies": {
+    "@langchain/community": "^0.2.18",
+    "@langchain/core": "^0.2.15",
+    "@langchain/openai": "^0.2.1",
+    "dotenv": "^16.4.5",
+    "duck-duck-scrape": "^2.2.5",
+    "langchain": "^0.2.9",
+    "openai": "^4.52.7"
+  }
+}
