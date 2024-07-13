@@ -1,6 +1,7 @@
 Algumas fontes e links úteis consultados para o conteúdo:
 
 https://github.com/rocketseat-education/nlw-journey-ia
+
 https://efficient-sloth-d85.notion.site/NLW-16-Journey-013b69ad79894122824abd76bc0dab9b
 
 ### Aula 1
