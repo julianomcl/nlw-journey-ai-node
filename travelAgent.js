@@ -36,7 +36,6 @@ const openAIAgent = async (input, llm) => {
   const agentExecutor = new AgentExecutor({
     agent,
     tools,
-    // returnIntermediateSteps: true,
   });
   const result = await agentExecutor.invoke({ input });
 
@@ -49,7 +48,6 @@ const reActAgent = async (input, llm) => {
   const agentExecutor = new AgentExecutor({
     agent,
     tools,
-    // returnIntermediateSteps: true,
   });
 
   const result = await agentExecutor.invoke({ input });
@@ -64,7 +62,6 @@ const loadData = async () => {
   );
   const docs = await loader.load();
   const splitter = RecursiveCharacterTextSplitter.fromLanguage("html");
-  // const transformer = new HtmlToTextTransformer();
   const transformer = new MozillaReadabilityTransformer();
 
   const sequence = splitter.pipe(transformer);
@@ -74,13 +71,7 @@ const loadData = async () => {
   const vectorStore = await Chroma.fromDocuments(
     newDocuments,
     new OpenAIEmbeddings(),
-    {
-      collectionName: "dicas-de-viagem",
-      url: "http://localhost:8000", // Optional, will default to this value
-      collectionMetadata: {
-        "hnsw:space": "cosine",
-      }, // Optional, can be used to specify the distance method of the embedding space https://docs.trychroma.com/usage-guide#changing-the-distance-function
-    },
+    { collectionName: "dicas-de-viagem" },
   );
 
   const retriever = vectorStore.asRetriever();
@@ -117,7 +108,6 @@ const supervisorAgent = async (input, llm, webContext, relevantDocs) => {
 };
 
 const getResponse = async (input, llm) => {
-  // const openAIResponse = await openAIAgent(input, llm);
   const reActOutput = await reActAgent(input, llm);
   const relevantDocs = await getRelevantDocs(input);
   const supervisorResponse = await supervisorAgent(
@@ -130,8 +120,15 @@ const getResponse = async (input, llm) => {
   return supervisorResponse;
 };
 
-const input =
-  "Vou viajar para Londres em Agosto de 2024. Faça para mim um roteiro de viagem para mim com eventos que irão ocorrer na data da viagem e com o preço de passagem de São Paulo para Londres.";
+const lambaHandler = async (event) => {
+  const { input } = event;
+  const result = await getResponse(input, llm);
 
-const result = await getResponse(input, llm);
-console.log(result.content);
+  return {
+    headers: { "Content-Type": "application/json" },
+    statusCode: 200,
+    body: {
+      message: result.content,
+    },
+  };
+};
